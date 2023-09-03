@@ -9,3 +9,4 @@ do jogador ficar mais forte, o objetivo do jogador é sobreviver o maior número
 hordas sem morrer, se o jogador falha ele iniciará do começo novamente.
 
 Engine a ser usada: Unity
+Jogos semelhantes: Vampire Survivors; Survival.io
