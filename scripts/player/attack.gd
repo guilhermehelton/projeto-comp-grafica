@@ -37,6 +37,7 @@ var projectile_amount: int
 
 func _ready():
 	projectile_amount = projectile_max_amount;
+	set_text();
 
 func attack():
 	if not can_shoot(weapons_list[weapon_index]):
@@ -45,6 +46,7 @@ func attack():
 		soldier.is_attacking = true;
 		update_ammo(weapons_list[weapon_index], "decrease", 1);
 		texture.action_behavior(weapons_list[weapon_index])
+	set_text();
 
 func can_shoot(type: String) -> bool:
 	if type == "fire" and projectile_amount > 0:
@@ -87,3 +89,6 @@ func spawn_projectile(type: String) -> void:
 	get_tree().root.call_deferred("add_child", projectile)
 	projectile.global_position = projectile_spawner.global_position
 	projectile.direction = projectile_direction
+
+func set_text() -> void:
+	get_tree().call_group("interface", "set_weapon_ammo", projectile_amount, projectile_max_amount);

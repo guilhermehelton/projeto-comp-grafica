@@ -1,0 +1,79 @@
+[gd_scene load_steps=13 format=3 uid="uid://d4demta3vgfbf"]
+
+[ext_resource type="PackedScene" uid="uid://cpcgnt27angnw" path="res://scenes/effects/base_effect.tscn" id="1_cwej0"]
+[ext_resource type="Texture2D" uid="uid://ba8lol62hc1ar" path="res://character/assets/effects/small_explosion.png" id="2_2c5m3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uo0xn"]
+atlas = ExtResource("2_2c5m3")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uhmww"]
+atlas = ExtResource("2_2c5m3")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lnfib"]
+atlas = ExtResource("2_2c5m3")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0myn1"]
+atlas = ExtResource("2_2c5m3")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s0lld"]
+atlas = ExtResource("2_2c5m3")
+region = Rect2(96, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vhkla"]
+atlas = ExtResource("2_2c5m3")
+region = Rect2(120, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rprau"]
+atlas = ExtResource("2_2c5m3")
+region = Rect2(144, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6gde"]
+atlas = ExtResource("2_2c5m3")
+region = Rect2(168, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2xkkk"]
+atlas = ExtResource("2_2c5m3")
+region = Rect2(192, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_boahk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uo0xn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uhmww")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lnfib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0myn1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s0lld")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vhkla")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rprau")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l6gde")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xkkk")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[node name="Effect" instance=ExtResource("1_cwej0")]
+sprite_frames = SubResource("SpriteFrames_boahk")
+animation = &"idle"

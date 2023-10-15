@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmseikk1jqy26"]
+
+[ext_resource type="Script" path="res://scripts/menagement/interface.gd" id="1_3ojm2"]
+[ext_resource type="FontFile" uid="uid://cluk12cw0i2cb" path="res://character/assets/fonts/bit_potion.ttf" id="1_covdt"]
+
+[node name="Interface" type="CanvasLayer" groups=["interface"]]
+script = ExtResource("1_3ojm2")
+
+[node name="Ammo" type="Label" parent="."]
+custom_minimum_size = Vector2(70, 14)
+offset_left = 5.0
+offset_right = 75.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("1_covdt")
+theme_override_font_sizes/font_size = 8
+text = "Munição: "
+vertical_alignment = 1

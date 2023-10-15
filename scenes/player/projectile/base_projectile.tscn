@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://daj8lkkmc4qgo"]
+[gd_scene load_steps=5 format=3 uid="uid://daj8lkkmc4qgo"]
 
 [ext_resource type="Script" path="res://scripts/player/projectile.gd" id="1_b4x7o"]
 [ext_resource type="Texture2D" uid="uid://kl3iy2dj8jcq" path="res://character/assets/projectiles/bullets.png" id="2_dpcej"]
+[ext_resource type="PackedScene" uid="uid://d4demta3vgfbf" path="res://scenes/effects/small_explosion.tscn" id="2_il6q2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j5sh1"]
 size = Vector2(2, 2)
@@ -12,6 +13,7 @@ damage = 3
 move_speed = 120
 shake_lifetime = 0.25
 shake_strength = 0.25
+explosion_effect = ExtResource("2_il6q2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_dpcej")

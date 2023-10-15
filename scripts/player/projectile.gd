@@ -27,7 +27,12 @@ func on_body_entered(body):
 func kill():
 	emit_signal("camera_shake", shake_lifetime, shake_strength)
 	already_destroyed = true
-	#spawn_explosion
+	spawn_explosion()
 	queue_free()
+
+func spawn_explosion():
+	var explosion = explosion_effect.instantiate();
+	get_tree().root.call_deferred("add_child", explosion);
+	explosion.global_position = global_position;
 
 

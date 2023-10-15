@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpcgnt27angnw"]
+
+[ext_resource type="Script" path="res://scripts/enviroments/base_effect.gd" id="1_xmv6i"]
+
+[node name="Effect" type="AnimatedSprite2D"]
+script = ExtResource("1_xmv6i")
+
+[connection signal="animation_finished" from="." to="." method="on_animation_finished"]
