@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=3 uid="uid://cmxuiycc7p3ik"]
+
+[ext_resource type="PackedScene" uid="uid://cpcgnt27angnw" path="res://scenes/effects/base_effect.tscn" id="1_cmtyl"]
+[ext_resource type="Texture2D" uid="uid://dtqy7b1ofvhmo" path="res://character/assets/effects/small-fragments.png" id="2_yuk2l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c8sqj"]
+atlas = ExtResource("2_yuk2l")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kmg1r"]
+atlas = ExtResource("2_yuk2l")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5bfpn"]
+atlas = ExtResource("2_yuk2l")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45rvj"]
+atlas = ExtResource("2_yuk2l")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_762ca"]
+atlas = ExtResource("2_yuk2l")
+region = Rect2(96, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xu7jo"]
+atlas = ExtResource("2_yuk2l")
+region = Rect2(120, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t64o6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c8sqj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kmg1r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5bfpn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45rvj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_762ca")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xu7jo")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[node name="DeathEffect" instance=ExtResource("1_cmtyl")]
+sprite_frames = SubResource("SpriteFrames_t64o6")
+animation = &"idle"

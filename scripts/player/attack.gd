@@ -78,6 +78,9 @@ func verify_ammo_amount(weapon_type: String):
 	if weapon_type == "fire" and projectile_amount > projectile_max_amount:
 		projectile_amount = projectile_max_amount;
 		
+	if weapon_type == weapons_list[weapon_index]:
+		set_text()
+	
 func spawn_projectile(type: String) -> void:
 	var projectile_direction: Vector2 = (soldier.get_global_mouse_position() - soldier.global_position).normalized()
 	var projectile = null

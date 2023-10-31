@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6265cjrm4sjg"]
+
+[ext_resource type="Script" path="res://scripts/enviroments/health.gd" id="1_8ughe"]
+[ext_resource type="Texture2D" uid="uid://5t4pcqrts2l4" path="res://character/assets/interface/icon_set.png" id="1_gnjd5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tk4qd"]
+radius = 12.1655
+
+[node name="Health" type="Area2D"]
+collision_layer = 16
+collision_mask = 34
+script = ExtResource("1_8ughe")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_gnjd5")
+region_enabled = true
+region_rect = Rect2(48, 16, 16, 16)
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_tk4qd")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

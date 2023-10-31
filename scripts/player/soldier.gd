@@ -11,7 +11,7 @@ var texture:Sprite2D = get_node("Texture");
 @onready
 var is_attacking: bool = false;
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	move_state.move();
 	texture.animate(move_state.velocity);
 	attack_state.attack();

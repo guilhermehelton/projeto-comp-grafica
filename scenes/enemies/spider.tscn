@@ -1,0 +1,106 @@
+[gd_scene load_steps=9 format=3 uid="uid://dt2ac63tnpt7h"]
+
+[ext_resource type="PackedScene" uid="uid://s0bx521vdqxv" path="res://scenes/enemies/enemy.tscn" id="1_o34dh"]
+[ext_resource type="Texture2D" uid="uid://foa8j7gv43hu" path="res://character/assets/robots/spider.png" id="2_eqjdl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iuyty"]
+size = Vector2(15, 14)
+
+[sub_resource type="Animation" id="Animation_sl5md"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+
+[sub_resource type="Animation" id="Animation_j5c43"]
+resource_name = "walk"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 7, 8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g86lj"]
+_data = {
+"RESET": SubResource("Animation_sl5md"),
+"walk": SubResource("Animation_j5c43")
+}
+
+[sub_resource type="GDScript" id="GDScript_gtgn3"]
+script/source = "extends EnemyHitbox
+class_name EnemySpiderHitbox
+
+func _on_area_entered(area):
+	if area.name == \"Hitbox\":
+		return
+	
+	area.kill()
+	update_health(area.damage, \"\")
+
+func update_health(damage: int, _type: String):
+	health -= damage
+	health_bar.update_value(health)
+	if health <= 0:
+		spawn_effect();
+		get_parent().kill()
+
+func spawn_effect():
+	var effect = DEATH_EFFECT.instantiate()
+	effect.global_position = global_position
+	get_tree().root.call_deferred(\"add_child\", effect)
+
+func _on_body_entered(_body):
+	pass
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q8kls"]
+size = Vector2(11, 10)
+
+[node name="Spider" instance=ExtResource("1_o34dh")]
+attack_cooldown = 3.0
+damage = 4
+move_speed = 20
+distance_threshold = 5
+
+[node name="Texture" parent="." index="0"]
+texture = ExtResource("2_eqjdl")
+hframes = 5
+vframes = 5
+frame = 5
+
+[node name="Collision" parent="." index="1"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_iuyty")
+
+[node name="Animation" parent="." index="4"]
+autoplay = "walk"
+libraries = {
+"": SubResource("AnimationLibrary_g86lj")
+}
+
+[node name="Hitbox" parent="." index="7"]
+visible = true
+script = SubResource("GDScript_gtgn3")
+health = 10
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_q8kls")

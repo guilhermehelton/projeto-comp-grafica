@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://fxlc64igccb8"]
+
+[ext_resource type="Script" path="res://scripts/enviroments/hitbox.gd" id="1_mag1n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q8kls"]
+size = Vector2(11, 10)
+
+[node name="Hitbox" type="Area2D"]
+collision_layer = 0
+collision_mask = 20
+script = ExtResource("1_mag1n")
+health = 15
+texturePath = NodePath("../Texture")
+healthBarPath = NodePath("../HealthBar")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_q8kls")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

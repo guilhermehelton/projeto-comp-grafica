@@ -1,15 +1,16 @@
-[gd_scene load_steps=18 format=3 uid="uid://028g6g8mstk8"]
+[gd_scene load_steps=19 format=3 uid="uid://028g6g8mstk8"]
 
 [ext_resource type="Script" path="res://scripts/player/soldier.gd" id="1_f2pxo"]
 [ext_resource type="Texture2D" uid="uid://bficc4gmrjb23" path="res://character/assets/soldiers/assault.png" id="1_onot7"]
-[ext_resource type="Texture2D" uid="uid://c2uw7bj8dl8k7" path="res://resources/health_bar.tres" id="2_5ey4t"]
 [ext_resource type="Script" path="res://scripts/player/soldier_texture.gd" id="3_nwjla"]
 [ext_resource type="Script" path="res://scripts/player/move.gd" id="4_i01e7"]
+[ext_resource type="Script" path="res://scripts/enviroments/hitbox.gd" id="4_kc37j"]
+[ext_resource type="PackedScene" uid="uid://da5db1xlhjbpn" path="res://scenes/combat/health_bar.tscn" id="4_orgnt"]
 [ext_resource type="Script" path="res://scripts/player/attack.gd" id="6_l4fmc"]
 [ext_resource type="PackedScene" uid="uid://daj8lkkmc4qgo" path="res://scenes/player/projectile/base_projectile.tscn" id="7_83w8t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kht88"]
-size = Vector2(10, 10)
+size = Vector2(9, 8)
 
 [sub_resource type="Animation" id="Animation_gnenw"]
 length = 0.001
@@ -178,9 +179,11 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q8kls"]
-size = Vector2(10, 10)
+size = Vector2(11, 10)
 
 [node name="Character" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 25
 script = ExtResource("1_f2pxo")
 
 [node name="Texture" type="Sprite2D" parent="."]
@@ -193,7 +196,7 @@ animation = NodePath("../AnimationPlayer")
 projectile_spawner = NodePath("../Marker2D")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-visible = false
+position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_kht88")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -201,10 +204,16 @@ libraries = {
 "": SubResource("AnimationLibrary_qu17b")
 }
 
-[node name="Hitbox" type="Area2D" parent="."]
-visible = false
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 29
+script = ExtResource("4_kc37j")
+health = 20
+texturePath = NodePath("../Texture")
+healthBarPath = NodePath("../HealthBar")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_q8kls")
 
 [node name="Marker2D" type="Marker2D" parent="."]
@@ -217,16 +226,7 @@ position = Vector2(0, 1)
 [node name="Camera2D" type="Camera2D" parent="."]
 y_sort_enabled = true
 
-[node name="HealthBar" type="TextureProgressBar" parent="."]
-offset_left = -6.0
-offset_top = -10.0
-offset_right = 42.0
-offset_bottom = 6.0
-scale = Vector2(0.25, 0.25)
-value = 80.0
-texture_under = ExtResource("2_5ey4t")
-texture_progress = ExtResource("2_5ey4t")
-tint_under = Color(0.301961, 0.301961, 0.301961, 1)
+[node name="HealthBar" parent="." instance=ExtResource("4_orgnt")]
 
 [node name="States" type="Node" parent="."]
 
@@ -237,7 +237,7 @@ soldier = NodePath("../..")
 
 [node name="Attack" type="Node" parent="States"]
 script = ExtResource("6_l4fmc")
-projectile_max_amount = 30
+projectile_max_amount = 60
 fire_projectile = ExtResource("7_83w8t")
 texturePath = NodePath("../../Texture")
 cameraPath = NodePath("../../Camera2D")
@@ -245,3 +245,5 @@ soldierPath = NodePath("../..")
 projectileSpawnerPath = NodePath("../../Marker2D")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="Texture" method="on_animation_finished"]
+[connection signal="area_entered" from="HitBox" to="HitBox" method="_on_area_entered" flags=18]
+[connection signal="body_entered" from="HitBox" to="HitBox" method="_on_body_entered" flags=18]

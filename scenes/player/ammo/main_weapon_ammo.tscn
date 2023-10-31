@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dtbsaig31wl5r"]
+
+[ext_resource type="PackedScene" uid="uid://bdxelw0s4om6b" path="res://scenes/player/ammo/base_ammo.tscn" id="1_ic1sk"]
+[ext_resource type="Texture2D" uid="uid://5t4pcqrts2l4" path="res://character/assets/interface/icon_set.png" id="2_gvp1l"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uhg0w"]
+radius = 12.0416
+
+[node name="MainWeaponAmmo" instance=ExtResource("1_ic1sk")]
+type = "fire"
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_gvp1l")
+region_enabled = true
+region_rect = Rect2(0, 16, 16, 16)
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_uhg0w")
