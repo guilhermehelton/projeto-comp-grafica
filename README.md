@@ -11,5 +11,6 @@ O projeto é um jogo de ação(shooter) onde o personagem precisa sobreviver e a
 Os inimigos soltam power ups que são úteis para o jogador sobreviver por mais tempo.
 
 
-Engine a ser usada: Godot
+Engine  usada: Godot
+<br>
 Jogos semelhantes: Vampire Survivors; Survival.io
