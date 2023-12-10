@@ -6,12 +6,11 @@ const CELL_SIZE: int = 16;
 @onready var enemy_spawn: Node2D = get_node("Node2D");
 @onready var soldier: CharacterBody2D = get_node("Character");
 @onready var base_terrain: TileMap = get_node("Node2D/BaseTerrain");
-var score = 0
 
 func _ready() -> void:
 	define_camera_limit();
 	set_spawn_tiles();
-	
+	Global.score = 0;
 	
 func set_spawn_tiles():
 	for tile in base_terrain.get_used_cells(0):
@@ -52,5 +51,5 @@ func send_player():
 	get_tree().call_group("enemy", "get_player")
 
 func increase_score():
-	score += 100;
-	get_tree().call_group("interface", "set_score", score)
+	Global.score += 100;
+	get_tree().call_group("interface", "set_score", Global.score)

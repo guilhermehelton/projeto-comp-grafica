@@ -18,6 +18,8 @@ var weapon_index = 0
 var granade_amount: int = 5
 var max_granade_amount: int = 5
 
+var projectile_damage = 3;
+
 var projectile_amount: int
 @export var projectile_max_amount : int
 @export var class_weapon : String
@@ -34,6 +36,8 @@ var projectile_amount: int
 
 @export var projectileSpawnerPath: NodePath;
 @onready var projectile_spawner: Marker2D = get_node(projectileSpawnerPath) as Marker2D;
+
+@onready var timer: Timer = get_node("Timer");
 
 func _ready():
 	projectile_amount = projectile_max_amount;
@@ -87,6 +91,8 @@ func spawn_projectile(type: String) -> void:
 	match type:
 		"fire":
 			projectile = fire_projectile.instantiate();
+			$FireFx.play();
+			projectile.damage = projectile_damage;
 		"throw":
 			pass
 	get_tree().root.call_deferred("add_child", projectile)
@@ -95,3 +101,8 @@ func spawn_projectile(type: String) -> void:
 
 func set_text() -> void:
 	get_tree().call_group("interface", "set_weapon_ammo", projectile_amount, projectile_max_amount);
+
+func _on_timer_timeout():
+	projectile_damage = 3;
+	Global.currentPowerUp = '';
+	get_tree().call_group("interface", "set_powerUp", Global.currentPowerUp)

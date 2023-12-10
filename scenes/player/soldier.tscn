@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://028g6g8mstk8"]
+[gd_scene load_steps=20 format=3 uid="uid://028g6g8mstk8"]
 
 [ext_resource type="Script" path="res://scripts/player/soldier.gd" id="1_f2pxo"]
 [ext_resource type="Texture2D" uid="uid://bficc4gmrjb23" path="res://character/assets/soldiers/assault.png" id="1_onot7"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://da5db1xlhjbpn" path="res://scenes/combat/health_bar.tscn" id="4_orgnt"]
 [ext_resource type="Script" path="res://scripts/player/attack.gd" id="6_l4fmc"]
 [ext_resource type="PackedScene" uid="uid://daj8lkkmc4qgo" path="res://scenes/player/projectile/base_projectile.tscn" id="7_83w8t"]
+[ext_resource type="AudioStream" uid="uid://k3h5d8bsbj3u" path="res://character/assets/sounds/ShootFx.MP3" id="9_ebmcl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kht88"]
 size = Vector2(9, 8)
@@ -211,6 +212,8 @@ script = ExtResource("4_kc37j")
 health = 20
 texturePath = NodePath("../Texture")
 healthBarPath = NodePath("../HealthBar")
+moveStatePath = NodePath("../States/Move")
+attackStatePath = NodePath("../States/Attack")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(0.5, 0)
@@ -235,6 +238,8 @@ script = ExtResource("4_i01e7")
 walk_speed = 60
 soldier = NodePath("../..")
 
+[node name="Timer" type="Timer" parent="States/Move"]
+
 [node name="Attack" type="Node" parent="States"]
 script = ExtResource("6_l4fmc")
 projectile_max_amount = 60
@@ -244,6 +249,13 @@ cameraPath = NodePath("../../Camera2D")
 soldierPath = NodePath("../..")
 projectileSpawnerPath = NodePath("../../Marker2D")
 
+[node name="Timer" type="Timer" parent="States/Attack"]
+
+[node name="FireFx" type="AudioStreamPlayer2D" parent="States/Attack"]
+stream = ExtResource("9_ebmcl")
+
 [connection signal="animation_finished" from="AnimationPlayer" to="Texture" method="on_animation_finished"]
 [connection signal="area_entered" from="HitBox" to="HitBox" method="_on_area_entered" flags=18]
 [connection signal="body_entered" from="HitBox" to="HitBox" method="_on_body_entered" flags=18]
+[connection signal="timeout" from="States/Move/Timer" to="States/Move" method="_on_timer_timeout"]
+[connection signal="timeout" from="States/Attack/Timer" to="States/Attack" method="_on_timer_timeout"]

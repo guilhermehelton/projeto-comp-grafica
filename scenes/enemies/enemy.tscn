@@ -26,10 +26,10 @@ one_shot = true
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="Hitbox" parent="." instance=ExtResource("3_g16h8")]
-collision_layer = 0
 collision_mask = 10
 script = ExtResource("4_r40m5")
-health = 0
+health = null
+moveStatePath = null
 
 [connection signal="screen_entered" from="Notifier" to="." method="_on_notifier_screen_entered"]
 [connection signal="screen_exited" from="Notifier" to="." method="_on_notifier_screen_exited"]

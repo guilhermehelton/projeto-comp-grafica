@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=3 uid="uid://b87e6rfh7k5xp"]
+
+[ext_resource type="Script" path="res://scripts/menagement/death_menu.gd" id="1_lgosi"]
+[ext_resource type="FontFile" uid="uid://cluk12cw0i2cb" path="res://character/assets/fonts/bit_potion.ttf" id="2_hytlh"]
+[ext_resource type="AudioStream" uid="uid://cfih7oodsh5wa" path="res://character/assets/music/GameOverFx.MP3" id="3_6ke4n"]
+[ext_resource type="Theme" uid="uid://cro50oenptl7s" path="res://resources/Buttons.tres" id="3_npu3c"]
+
+[node name="DeathMenu" type="Control" groups=["death_menu"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lgosi")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 128.0
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 0
+offset_left = 28.0
+offset_top = 27.5
+offset_right = 228.0
+offset_bottom = 100.5
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.854902, 0, 0.0941176, 1)
+theme_override_fonts/font = ExtResource("2_hytlh")
+theme_override_font_sizes/font_size = 22
+text = "Você morreu! :("
+horizontal_alignment = 1
+
+[node name="Pontos" type="Label" parent="VBoxContainer" groups=["death_menu"]]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_hytlh")
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="Restart" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("3_npu3c")
+theme_override_fonts/font = ExtResource("2_hytlh")
+text = "Reiniciar"
+
+[node name="EndFx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_6ke4n")
+autoplay = true
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer2/Restart" to="." method="_on_restart_pressed"]

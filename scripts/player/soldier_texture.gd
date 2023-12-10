@@ -52,4 +52,4 @@ func on_animation_finished(anim_name : String) -> void:
 	if anim_name == "hit":
 		parentNode.set_physics_process(true)
 	if anim_name == "death":
-		get_tree().call_group("interface", "reload_game")
+		get_tree().call_group("interface", "open_death_menu")

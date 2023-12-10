@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://3s40ui7f7vfr"]
+[gd_scene load_steps=33 format=3 uid="uid://3s40ui7f7vfr"]
 
 [ext_resource type="PackedScene" uid="uid://028g6g8mstk8" path="res://scenes/player/soldier.tscn" id="1_ivper"]
 [ext_resource type="Script" path="res://scripts/menagement/game_level.gd" id="1_qr7um"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cmseikk1jqy26" path="res://scenes/menagement/interface.tscn" id="2_e5g1e"]
 [ext_resource type="Script" path="res://scripts/menagement/enemy_spawn.gd" id="2_m0mdd"]
 [ext_resource type="PackedScene" uid="uid://dt2ac63tnpt7h" path="res://scenes/enemies/spider.tscn" id="6_6qexx"]
+[ext_resource type="AudioStream" uid="uid://pi5y82uj0fhy" path="res://character/assets/music/MusicTheme.MP3" id="8_xh5wo"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_cdxhb"]
 vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -1503,9 +1504,14 @@ autostart = true
 
 [node name="Character" parent="." instance=ExtResource("1_ivper")]
 y_sort_enabled = true
-position = Vector2(68, 49)
+position = Vector2(317, 164)
 collision_mask = 27
 
 [node name="Interface" parent="." instance=ExtResource("2_e5g1e")]
+
+[node name="GameMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_xh5wo")
+volume_db = 4.078
+autoplay = true
 
 [connection signal="timeout" from="Node2D/Timer" to="Node2D" method="_on_timer_timeout"]

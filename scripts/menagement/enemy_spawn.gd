@@ -7,7 +7,7 @@ const CELL_SIZE:int = 16
 @onready var timer: Timer = get_node("Timer");
 
 var avaliable_cells: Array = [];
-var spawn_cooldown:float = 3
+var spawn_cooldown:float = 2;
 
 @export var enemies_list: Array[PackedScene];
 

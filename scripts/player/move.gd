@@ -7,6 +7,7 @@ var velocity: Vector2
 
 @export var soldier: NodePath;
 @onready var soldierNode: CharacterBody2D = get_node(soldier) as CharacterBody2D;
+@onready var timer: Timer = get_node("Timer");
 
 func move()->void:
 	if soldierNode.is_attacking:
@@ -25,3 +26,8 @@ func get_direction() -> Vector2:
 
 func move_state():
 	return walk_speed
+
+func _on_timer_timeout():
+	walk_speed = 60;
+	Global.currentPowerUp = '';
+	get_tree().call_group("interface", "set_powerUp", Global.currentPowerUp)

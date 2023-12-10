@@ -12,12 +12,20 @@ var distance: float
 
 var items_dict: Dictionary = {
 	"Ammo": [
-		[1, 70],
+		[1, 25],
 		preload("res://scenes/player/ammo/main_weapon_ammo.tscn")
 	],
 	"Health": [
-		[81, 100],
+		[26, 50],
 		preload("res://scenes/combat/health.tscn")
+	],
+	"Speed": [
+		[51, 75],
+		preload("res://scenes/combat/speed_up.tscn")
+	],
+	"Damage":[
+		[76, 100],
+		preload("res://scenes/combat/damage_upgrade.tscn")
 	]
 }
 

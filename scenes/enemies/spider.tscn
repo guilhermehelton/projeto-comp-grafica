@@ -75,7 +75,7 @@ func _on_body_entered(_body):
 size = Vector2(11, 10)
 
 [node name="Spider" instance=ExtResource("1_o34dh")]
-attack_cooldown = 3.0
+attack_cooldown = 4.0
 damage = 4
 move_speed = 20
 distance_threshold = 5
@@ -97,7 +97,6 @@ libraries = {
 }
 
 [node name="Hitbox" parent="." index="7"]
-visible = true
 script = SubResource("GDScript_gtgn3")
 health = 10
 

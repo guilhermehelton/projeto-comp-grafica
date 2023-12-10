@@ -1,0 +1,75 @@
+[gd_scene load_steps=6 format=3 uid="uid://bqgou1lsapoew"]
+
+[ext_resource type="Script" path="res://scripts/menagement/menu.gd" id="1_lxvqm"]
+[ext_resource type="Texture2D" uid="uid://d1b3cfn0dt22e" path="res://character/assets/interface/spacewalk_planet_surface.png" id="2_0qjge"]
+[ext_resource type="FontFile" uid="uid://cluk12cw0i2cb" path="res://character/assets/fonts/bit_potion.ttf" id="2_5n3rj"]
+[ext_resource type="AudioStream" uid="uid://d2y2ls3pd356c" path="res://character/assets/music/TittleThemeFx.MP3" id="3_7j800"]
+[ext_resource type="Theme" uid="uid://cro50oenptl7s" path="res://resources/Buttons.tres" id="4_r63d8"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lxvqm")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 256.0
+offset_bottom = 128.0
+color = Color(0, 0, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(128, 70)
+scale = Vector2(0.402018, 0.402018)
+texture = ExtResource("2_0qjge")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+offset_left = 28.0
+offset_top = 27.5
+offset_right = 228.0
+offset_bottom = 100.5
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5n3rj")
+theme_override_font_sizes/font_size = 22
+text = "Pixel Warfare"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="Play" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+show_behind_parent = true
+layout_mode = 2
+theme = ExtResource("4_r63d8")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_5n3rj")
+text = "Jogar
+"
+
+[node name="Quit" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("4_r63d8")
+theme_override_fonts/font = ExtResource("2_5n3rj")
+text = "Sair"
+
+[node name="TittleFx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_7j800")
+autoplay = true
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer2/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer2/Quit" to="." method="_on_quit_pressed"]

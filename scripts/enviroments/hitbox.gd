@@ -10,10 +10,13 @@ var max_health_value: int
 
 @export var texturePath: NodePath;
 @export var healthBarPath: NodePath;
+@export var moveStatePath: NodePath;
+@export var attackStatePath: NodePath;
 
 @onready var texture: Sprite2D = get_node(texturePath) as Sprite2D
 @onready var health_bar: TextureProgressBar = get_node(healthBarPath)
-
+@onready var moveState: Node = get_node(moveStatePath)
+@onready var attackState: Node = get_node(attackStatePath)
 
 func _ready():
 	max_health_value = health;
@@ -42,3 +45,15 @@ func update_health(value: int, type: String):
 		return
 	
 	texture.action_behavior("hit")
+
+func update_speed(value: int):
+	moveState.timer.start(10);
+	Global.currentPowerUp = '+70% de velocidade'
+	get_tree().call_group("interface", "set_powerUp", Global.currentPowerUp)
+	moveState.walk_speed = value;
+
+func update_damage(value: int):
+	attackState.timer.start(10);
+	Global.currentPowerUp = '2x Dano'
+	get_tree().call_group("interface", "set_powerUp", Global.currentPowerUp)
+	attackState.projectile_damage = value;

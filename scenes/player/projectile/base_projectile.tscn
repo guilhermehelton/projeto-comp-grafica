@@ -11,7 +11,6 @@ size = Vector2(2, 2)
 collision_layer = 2
 collision_mask = 28
 script = ExtResource("1_b4x7o")
-damage = 3
 move_speed = 120
 shake_lifetime = 0.25
 shake_strength = 0.25
